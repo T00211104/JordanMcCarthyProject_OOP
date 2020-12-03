@@ -4,26 +4,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class AddClientDetailsGUI extends JFrame{
+public class AddClientGUI extends JFrame{
 
     private final Insets normalInsets = new Insets(5,10,0,10);
     private final Insets topInsets = new Insets(5,110,0,0);
+    private JTextField ClientIDField;
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JTextField phoneNoField;
     private JTextField dateRegisteredField;
     private GregorianCalendar dateChosen;
 
-    public AddClientDetailsGUI(){
-        super("Client Details");
+    public AddClientGUI(){
+        super("Add Client Details");
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 
-        panel.add(Box.createVerticalStrut(5));
+        panel.add(Box.createVerticalStrut(60));
         panel.add(createTitlePanel());
         panel.add(createDetailsPanel());
         panel.add(Box.createVerticalStrut(40));
@@ -39,12 +42,12 @@ public class AddClientDetailsGUI extends JFrame{
     }
 
     public static void main(String[] args) {
-        AddClientDetailsGUI ac = new AddClientDetailsGUI();}
+        AddClientGUI ac = new AddClientGUI();}
 
         private JPanel createTitlePanel() {
         JPanel panel = new JPanel();
 
-        JLabel titleLabel = new JLabel("Client Details");
+        JLabel titleLabel = new JLabel("Add Client Details");
         titleLabel.setFont(new Font("serif",Font.PLAIN,15));
 
         panel.add(titleLabel);
@@ -57,6 +60,14 @@ public class AddClientDetailsGUI extends JFrame{
         panel.setLayout(new GridBagLayout());
 
         int gridy = 0;
+
+        JLabel ClientIDLabel = new JLabel("ClientID");
+        addComponent(panel,ClientIDLabel,0,gridy,1,1,normalInsets,
+                GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
+
+        JTextField ClientIDField = new JTextField(1);
+        addComponent(panel, ClientIDField,1,gridy++,1,1,topInsets,
+                GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         JLabel firstNameLabel = new JLabel("First Name: ");
         addComponent(panel,firstNameLabel,0,gridy,1,1,normalInsets,
@@ -86,7 +97,7 @@ public class AddClientDetailsGUI extends JFrame{
         addComponent(panel,dateRegisteredLabel,0,gridy,1,1,normalInsets,
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
-        dateRegisteredField = new JTextField("enter in form dd-mm-yyyy or use date-chooser",1);
+        dateRegisteredField = new JTextField("dd-mm-yyyy",1);
         addComponent(panel,dateRegisteredField,0,gridy,2,1,topInsets,
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
@@ -98,7 +109,7 @@ public class AddClientDetailsGUI extends JFrame{
         dateRegisteredButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DateChooser dateChooser = new DateChooser(AddClientDetailsGUI.this);
+                DateChooser dateChooser = new DateChooser(AddClientGUI.this);
                 dateChosen = dateChooser.getDateChosen();
 
                 if(dateChosen!=null){
@@ -122,16 +133,7 @@ public class AddClientDetailsGUI extends JFrame{
                 }
             }
         });
-
-        JLabel ClientIDLabel = new JLabel("ClientID");
-        addComponent(panel,ClientIDLabel,1,gridy,1,1,normalInsets,
-                GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
-
-        JTextField clientIDField = new JTextField(1);
-        addComponent(panel, clientIDField,1,gridy,1,1,topInsets,
-                GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
-
-        return panel;
+    return panel;
     }
 
     private void addComponent(Container container, Component component,
@@ -180,6 +182,13 @@ public class AddClientDetailsGUI extends JFrame{
 
                         Client c = new Client(fn,lastNameField.getText(),phoneNoField.getText(),dateRegisteredField.getText(),dateRegisteredGC);
 
+                        Client c1 = new Client(1,"Michael","McGinn","0871234567",new GregorianCalendar(2006,01,15));
+                        Client c2 = new Client(2,"Margaret","Flaherty","0872345678",new GregorianCalendar(2007,03,17));
+                        Client c3 = new Client(3,"Tyrone","Mitchell","0873456789",new GregorianCalendar(2090,05,13));
+                        Client c4 = new Client(4,"Margaret","Flaherty","0874567891",new GregorianCalendar(2017,01,18));
+                        Client c5 = new Client(5,"Margaret","Flaherty","0831353213",new GregorianCalendar(2015,12,2));
+                        ArrayList<Client> allClients = new ArrayList<Client>(Arrays.asList(c1,c2,c3,c4,c5));
+
                         JOptionPane.showMessageDialog(null,"Client details are added\n\nDetails are -  " + c,"Added Client",JOptionPane.INFORMATION_MESSAGE);
                     }catch (NumberFormatException nfe){
                         JOptionPane.showMessageDialog(null,"Date Registered must be in the form dd-mm-yyyy","Invalid Date Registered",JOptionPane.ERROR_MESSAGE);
@@ -194,7 +203,7 @@ public class AddClientDetailsGUI extends JFrame{
                             JOptionPane.showMessageDialog(null,iae.getMessage(),"Invalid Date Registered",JOptionPane.ERROR_MESSAGE);
                     }
                 } else
-                    JOptionPane.showMessageDialog(null,"Date Registered must be at least 7 characters long","Invalid Date Registered",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Date Registered must be at 7 characters long","Invalid Date Registered",JOptionPane.ERROR_MESSAGE);
             }});
         panel.add(addButton);
         return panel;

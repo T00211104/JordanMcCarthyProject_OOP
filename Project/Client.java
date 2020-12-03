@@ -56,8 +56,10 @@ public class Client {
     }
 
     public void setPhoneNo(String phoneNo) {
-        if (phoneNo == null || phoneNo.equals(""))
+        if (phoneNo != null)
             this.phoneNo = phoneNo;
+        else
+            this.phoneNo = "not available";
     }
 
     public GregorianCalendar getDateRegistered() {

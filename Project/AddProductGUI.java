@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class AddProductDetailsGUI extends JFrame{
+public class AddProductGUI extends JFrame{
 
-    private Insets normalInsets = new Insets(5,10,0,10);
-    private Insets topInsets = new Insets(5,120,0,10);
+    private final Insets normalInsets = new Insets(5,10,0,10);
+    private final Insets topInsets = new Insets(5,10,0,10);
     private JTextField ProductIDField;
     private JTextField NameField;
     private JTextField ManufacturerField;
@@ -19,18 +19,18 @@ public class AddProductDetailsGUI extends JFrame{
     private JTextField DescriptionField;
     private JTextField PriceField;
 
-    public AddProductDetailsGUI(){
+    public AddProductGUI(){
         super("Add Products");
 
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BoxLayout(jPanel,BoxLayout.Y_AXIS));
 
-        jPanel.add(Box.createVerticalStrut(90));
+        jPanel.add(Box.createVerticalStrut(30));
         jPanel.add(createTitlePanel());
         jPanel.add(createDetailsPanel());
-        jPanel.add(Box.createVerticalStrut(75));
+        jPanel.add(Box.createVerticalStrut(50));
         jPanel.add(createSubmitPanel());
-        jPanel.add(Box.createVerticalStrut(60));
+        jPanel.add(Box.createVerticalStrut(75));
 
         add(jPanel);
 
@@ -41,7 +41,7 @@ public class AddProductDetailsGUI extends JFrame{
     }
 
     public static void main(String[] args) {
-      Object AddProduct = new AddProductDetailsGUI();
+      AddProductGUI ap = new AddProductGUI();
     }
 
     private JPanel createTitlePanel() {
@@ -66,7 +66,7 @@ public class AddProductDetailsGUI extends JFrame{
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         ProductIDField = new JTextField(15);
-        addComponent(panel,ProductIDField,0,gridy++,1,1,topInsets,
+        addComponent(panel,ProductIDField,1,gridy++,1,1,topInsets,
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         JLabel NameLabel = new JLabel("Name: ");
@@ -74,7 +74,7 @@ public class AddProductDetailsGUI extends JFrame{
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         NameField = new JTextField(15);
-        addComponent(panel,NameField,0,gridy++,1,1,topInsets,
+        addComponent(panel,NameField,1,gridy++,1,1,topInsets,
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         JLabel ManufacturerLabel = new JLabel("Manufacturer: ");
@@ -82,7 +82,7 @@ public class AddProductDetailsGUI extends JFrame{
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         ManufacturerField = new JTextField(15);
-        addComponent(panel,ManufacturerField,0,gridy++,1,1,topInsets,
+        addComponent(panel,ManufacturerField,1,gridy++,1,1,topInsets,
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         JLabel QuantityLabel = new JLabel("Quantity: ");
@@ -90,7 +90,7 @@ public class AddProductDetailsGUI extends JFrame{
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         QuantityField = new JTextField(15);
-        addComponent(panel,QuantityField,0,gridy,1,1,topInsets,
+        addComponent(panel,QuantityField,1,gridy,1,1,topInsets,
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         JLabel DescriptionLabel = new JLabel("Description: ");
@@ -98,7 +98,7 @@ public class AddProductDetailsGUI extends JFrame{
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         DescriptionField = new JTextField(15);
-        addComponent(panel,DescriptionField,0,gridy,1,1,topInsets,
+        addComponent(panel,DescriptionField,1,gridy,1,1,topInsets,
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         JLabel PriceLabel = new JLabel("\nPrice: ");
@@ -106,7 +106,7 @@ public class AddProductDetailsGUI extends JFrame{
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
         PriceField = new JTextField(15);
-        addComponent(panel,PriceField,0,gridy,1,1,topInsets,
+        addComponent(panel,PriceField,1,gridy,1,1,topInsets,
                 GridBagConstraints.LINE_START,GridBagConstraints.HORIZONTAL);
 
          return panel;
@@ -134,6 +134,8 @@ public class AddProductDetailsGUI extends JFrame{
                         String ProductID = ProductIDField.getText();
                         if(ProductID != null && !ProductID.isEmpty()){
                             pID = Integer.parseInt(ProductID);
+
+
                         }
                         else
                         {
@@ -148,7 +150,6 @@ public class AddProductDetailsGUI extends JFrame{
                         }
                         String Manufacturer = ManufacturerField.getText();
                         if (Manufacturer!=null&&!Manufacturer.isEmpty()){
-
                         }
                         else{
                             JOptionPane.showMessageDialog(null,"You did not enter a valid Manufacturer","Error!",JOptionPane.ERROR_MESSAGE);
@@ -179,14 +180,12 @@ public class AddProductDetailsGUI extends JFrame{
                         else{
                             JOptionPane.showMessageDialog(null,"You did not enter a valid Price","Error!",JOptionPane.ERROR_MESSAGE);
                         }
-                        Product p1 = new Product(1,Name,Manufacturer,qty,Description,pr);
-                        Product p2 = new Product(2,Name,Manufacturer,qty,Description,pr);
-                        Product p3 = new Product(3,Name,Manufacturer,qty,Description,pr);
-                        Product p4 = new Product(4,Name,Manufacturer,qty,Description,pr);
-                        Product p5 = new Product(5,Name,Manufacturer,qty,Description,pr);
-                        Product p6 = new Product(6,Name,Manufacturer,qty,Description,pr);
-                        Product p7 = new Product(7,Name,Manufacturer,qty,Description,pr);
-                        ArrayList<Product>allProducts = new ArrayList<Product>(Arrays.asList(p1,p2,p3,p4,p5,p6,p7));
+                        Product p1 = new Product(1,"Maxiflex Gloves","MaxiFlex",15,"A Breathable glove that provides protection and grip",3);
+                        Product p2 = new Product(2,"DEWALT CHALLENGER 3 SAFETY BOOT","DEWALT",3,"Waterproof Brown Safety Boots",150);
+                        Product p3 = new Product(3,"MOLDEX 2405 MASK,Manufacturer","MOLDEX",15,"Classic FFP-Mask: perfect fit without nose clip",4);
+                        Product p4 = new Product(4,"BOLLE TRACKER SAFETY GLASSES","Bolle",6,"The Bolle Tracker Safety Glasses are designed to protect against mechanical and chemical risks",15);
+                        Product p5 = new Product(5,"BIZWELD NAVY BOILERSUIT","BIZWELD",4," Clever design features include flame resistant reflective tape",45);
+                        ArrayList<Product>allProducts = new ArrayList<Product>(Arrays.asList(p1,p2,p3,p4,p5));
 
 
                         Product product = new Product(pID,Name,Manufacturer,qty,Description,pr);
